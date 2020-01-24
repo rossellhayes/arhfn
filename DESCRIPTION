@@ -17,3 +17,5 @@ Depends:
     fauxnaif (>= 0.5.4)
 Remotes: 
     rossellhayes/fauxnaif
+URL: https://github.com/rossellhayes/arhfn
+BugReports: https://github.com/rossellhayes/arhfn/issues
