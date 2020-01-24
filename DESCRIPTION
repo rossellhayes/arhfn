@@ -1,0 +1,19 @@
+Package: arhfn
+Title: Functions for Alex Rossell Hayes's Workflow
+Version: 0.0.1
+Authors@R: 
+    person(given = "Alex",
+           family = "Rossell Hayes",
+           role = c("aut", "cre"),
+           email = "alexander@rossellhayes.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    usethis (>= 1.5.1)
+Depends: 
+    fauxnaif (>= 0.5.4)
+Remotes: 
+    rossellhayes/fauxnaif
