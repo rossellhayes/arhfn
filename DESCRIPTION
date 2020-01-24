@@ -9,13 +9,16 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-Imports: 
-    usethis (>= 1.5.1)
-Depends: 
-    fauxnaif (>= 0.5.4)
-Remotes: 
-    rossellhayes/fauxnaif
 URL: https://github.com/rossellhayes/arhfn
 BugReports: https://github.com/rossellhayes/arhfn/issues
+Depends: 
+    fauxnaif (>= 0.5.4)
+Imports: 
+    magrittr (>= 1.5),
+    usethis (>= 1.5.1)
+Remotes: 
+    rossellhayes/fauxnaif
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2
