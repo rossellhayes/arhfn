@@ -15,7 +15,9 @@ Depends:
     fauxnaif (>= 0.5.4)
 Imports: 
     beepr (>= 1.3),
+    dplyr (>= 0.8.3),
     drake (>= 7.9.0),
+    haven (>= 2.2.0),
     here (>= 0.1),
     magrittr (>= 1.5),
     rstudioapi (>= 0.10),

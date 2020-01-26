@@ -6,5 +6,5 @@
 ##' @export
 
 lbl_to_chr <- function(tbl) {
-  mutate_if(tbl, is.labelled, ~ as.character(as_factor(.)))
+  dplyr::mutate_if(tbl, haven::is.labelled, ~ as.character(haven::as_factor(.)))
 }
