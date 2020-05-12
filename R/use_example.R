@@ -16,6 +16,7 @@ use_example <- function(name = NULL) {
   name <- usethis:::slug(name, "R")
   usethis:::check_file_name(name)
   usethis::use_directory("examples")
+  usethis::use_build_ignore("examples")
   usethis::edit_file(proj_path("examples", name))
   invisible(TRUE)
 }
