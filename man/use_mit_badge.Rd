@@ -6,9 +6,6 @@
 \usage{
 use_mit_badge()
 }
-\value{
-
-}
 \description{
 README badge for MIT license
 }

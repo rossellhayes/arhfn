@@ -2,7 +2,6 @@
 #'
 #' @seealso [usethis::use_badge()]
 #'
-#' @return
 #' @export
 #'
 #' @examples
