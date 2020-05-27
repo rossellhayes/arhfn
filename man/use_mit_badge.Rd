@@ -12,6 +12,12 @@ use_mit_badge()
 \description{
 README badge for MIT license
 }
+\examples{
+
+\dontrun{
+use_mit_badge()
+}
+}
 \seealso{
 \code{\link[usethis:use_badge]{usethis::use_badge()}}
 }

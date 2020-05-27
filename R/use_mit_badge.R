@@ -6,6 +6,10 @@
 #' @export
 #'
 #' @examples
+#'
+#' \dontrun{
+#' use_mit_badge()
+#' }
 
 use_mit_badge <- function() {
   usethis::use_badge(
