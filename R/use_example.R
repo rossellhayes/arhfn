@@ -17,6 +17,6 @@ use_example <- function(name = NULL) {
   usethis:::check_file_name(name)
   usethis::use_directory("examples")
   usethis::use_build_ignore("examples")
-  usethis::edit_file(proj_path("examples", name))
+  usethis::edit_file(usethis::proj_path("examples", name))
   invisible(TRUE)
 }
