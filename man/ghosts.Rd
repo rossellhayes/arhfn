@@ -7,8 +7,17 @@
 ghosts()
 }
 \value{
-
+Invisibly returns the string "ghosts"
 }
 \description{
-Print ghosts in the console
+To run on startup, add the following to your \verb{~/.Rprofile}
+(see \code{\link[usethis:edit_r_profile]{usethis::edit_r_profile()}}):\preformatted{if (interactive() && requireNamespace("arhfn", quietly = TRUE)) \{
+  setHook("rstudio.sessionInit", function(isNewSession) \{
+    rsthemes::use_theme_auto(dark_start = "18:00", dark_end = "6:00")
+  \}, action = "append")
+\}
+}
+}
+\examples{
+ghosts()
 }

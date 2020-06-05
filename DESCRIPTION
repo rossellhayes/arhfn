@@ -13,7 +13,6 @@ URL: https://github.com/rossellhayes/arhfn
 BugReports: https://github.com/rossellhayes/arhfn/issues
 Imports: 
     beepr,
-    cli,
     dplyr,
     drake,
     haven,
