@@ -10,7 +10,7 @@
 #' @export
 
 use_dependency <- function(package, min_version = TRUE) {
-  package <- rlang::as_label(rlang::sym(rlang::as_name(rlang::enquo(name))))
+  package <- rlang::as_label(rlang::sym(rlang::as_name(rlang::enquo(package))))
 
   if (min_version == FALSE) min_version <- NULL
 
