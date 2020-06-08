@@ -4,7 +4,7 @@
 \alias{use_dependency}
 \title{Add a package dependency}
 \usage{
-use_dependency(package, min_version = TRUE)
+use_dependency(package, min_version = TRUE, tidy = TRUE)
 }
 \arguments{
 \item{package}{Unquoted or quoted name of package to add as dependency}
@@ -12,6 +12,9 @@ use_dependency(package, min_version = TRUE)
 \item{min_version}{Optionally, supply a minimum version for the package.
 Defaults to \code{TRUE}, which uses the currently installed version.
 If \code{FALSE} or \code{NULL}, no minimum is set.}
+
+\item{tidy}{Whether to run \code{\link[usethis:tidy_description]{usethis::tidy_description()}} after adding
+dependency. Defaults to \code{TRUE}.}
 }
 \value{
 Adds \code{package} to file \code{DESCRIPTION} as a dependency with the minimum
