@@ -18,6 +18,6 @@
 #' @examples random_art()
 
 random_art <- function() {
-  fns <- list(arhfn::ghosts, arhfn::invaders)
-  fns[[sample(seq_along(fns), 1)]]()
+  fn <- list(arhfn::ghosts, arhfn::invaders)
+  fn[[round(runif(1, 1, length(fn)))]]()
 }
