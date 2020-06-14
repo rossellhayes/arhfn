@@ -21,6 +21,8 @@ Imports:
     readr,
     rlang,
     rstudioapi,
+    stringi,
+    stringr,
     tibble,
     usethis
 Encoding: UTF-8
