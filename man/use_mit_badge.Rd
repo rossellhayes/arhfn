@@ -16,5 +16,5 @@ use_mit_badge()
 }
 }
 \seealso{
-\code{\link[usethis:use_badge]{usethis::use_badge()}}
+\code{\link[usethis:badges]{usethis::use_badge()}}
 }

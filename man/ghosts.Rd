@@ -11,7 +11,7 @@ Invisibly returns the string "ghosts"
 }
 \description{
 To run on startup, add the following to your \verb{~/.Rprofile}
-(see \code{\link[usethis:edit_r_profile]{usethis::edit_r_profile()}}):\preformatted{if (interactive() && requireNamespace("arhfn", quietly = TRUE)) \{
+(see \code{\link[usethis:edit]{usethis::edit_r_profile()}}):\preformatted{if (interactive() && requireNamespace("arhfn", quietly = TRUE)) \{
   setHook("rstudio.sessionInit", function(isNewSession) \{
     arhfn::ghosts()
   \}, action = "append")

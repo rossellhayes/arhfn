@@ -15,5 +15,5 @@ name based on .R name.}
 Create or edit an example .R file
 }
 \seealso{
-\code{\link[usethis:use_r]{usethis::use_r()}} and \code{\link[usethis:use_test]{usethis::use_test()}}
+\code{\link[usethis:use_r]{usethis::use_r()}} and \code{\link[usethis:use_r]{usethis::use_test()}}
 }
