@@ -1,9 +1,6 @@
 #' Add a package logo to README.Rmd
 #'
-#' @return
 #' @export
-#'
-#' @examples
 
 use_readme_logo <- function() {
   i <- '<img src="man/figures/logo.png?raw=TRUE" align="right" height="138" />'

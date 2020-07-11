@@ -6,9 +6,6 @@
 \usage{
 use_readme_logo()
 }
-\value{
-
-}
 \description{
 Add a package logo to README.Rmd
 }
