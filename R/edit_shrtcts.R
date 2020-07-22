@@ -9,7 +9,8 @@ edit_shrtcts <- function() {
   usethis::edit_file(path)
   usethis::ui_todo(
     paste(
-      "Run", ui_code("add_rstudio_shortcuts()"), "for changes to take effect"
+      "Run", usethis::ui_code("add_rstudio_shortcuts()"),
+      "for changes to take effect"
     )
   )
   invisible(path)
