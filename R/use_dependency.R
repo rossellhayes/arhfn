@@ -4,7 +4,7 @@
 #' @param min_version Optionally, supply a minimum version for the package.
 #'   Defaults to `TRUE`, which uses the currently installed version.
 #'   If `FALSE` or `NULL`, no minimum is set.
-#' @param tidy Whether to run [usethis::tidy_description()] after adding
+#' @param tidy Whether to run [usethis::use_tidy_description()] after adding
 #'   dependency. Defaults to `TRUE`.
 #'
 #' @return Adds `package` to file `DESCRIPTION` as a dependency with the minimum

@@ -13,7 +13,7 @@ use_dependency(package, min_version = TRUE, tidy = TRUE)
 Defaults to \code{TRUE}, which uses the currently installed version.
 If \code{FALSE} or \code{NULL}, no minimum is set.}
 
-\item{tidy}{Whether to run \code{\link[usethis:tidy_description]{usethis::tidy_description()}} after adding
+\item{tidy}{Whether to run \code{\link[usethis:tidyverse]{usethis::use_tidy_description()}} after adding
 dependency. Defaults to \code{TRUE}.}
 }
 \value{
