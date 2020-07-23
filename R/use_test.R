@@ -12,7 +12,7 @@
 #' @export
 
 use_test <- function(name = NULL, open = rlang::is_interactive()) {
-  if (!usethis::uses_testthat()) {
+  if (!usethis:::uses_testthat()) {
     usethis::use_testthat()
   }
   name <- name %||% fs::path_file(rstudioapi::getSourceEditorContext()$path)
