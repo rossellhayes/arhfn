@@ -24,7 +24,7 @@ use_dependency(
 \item{package}{Unquoted or quoted name of package.}
 
 \item{type}{Whether to add the package as an import, dependency,
-or suggestion.}
+or suggestion (case insensitive).}
 
 \item{min_version}{Optionally, supply a minimum version for the package.
 If \code{TRUE}, uses the currently installed version.

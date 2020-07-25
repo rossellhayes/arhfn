@@ -2,7 +2,7 @@
 #'
 #' @param package Unquoted or quoted name of package.
 #' @param type Whether to add the package as an import, dependency,
-#'   or suggestion.
+#'   or suggestion (case insensitive).
 #' @param min_version Optionally, supply a minimum version for the package.
 #'   If `TRUE`, uses the currently installed version.
 #'   If `FALSE` or `NULL`, no minimum is set.
@@ -26,8 +26,12 @@ use_package <- function(
 
   if (isTRUE(min_version == FALSE)) {min_version <- NULL}
 
+  type <- stringr::str_to_title(type)
+
   usethis::use_package(
-    package, type = match.arg(type), min_version = min_version
+    package,
+    type        = match.arg(type),
+    min_version = min_version
   )
 
   if (tidy) {usethis::use_tidy_description()}
