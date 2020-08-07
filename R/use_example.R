@@ -17,6 +17,15 @@ use_example <- function(name = NULL) {
   usethis:::check_file_name(name)
   usethis::use_directory("examples")
   usethis::use_build_ignore("examples")
-  usethis::edit_file(usethis::proj_path("examples", name))
-  invisible(TRUE)
+  path      <- fs::path("examples", name)
+  full_path <- usethis::proj_path(path)
+  usethis::edit_file(full_path)
+  usethis::ui_todo(
+    paste(
+      "Add",
+      usethis::ui_code(paste("#' @example", path)),
+      "to your roxygen documentation"
+    )
+  )
+  invisible(full_path)
 }
