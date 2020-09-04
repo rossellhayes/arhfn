@@ -30,7 +30,7 @@ use_package <- function(
 
   usethis::use_package(
     package,
-    type        = match.arg(tools::toTitleCase(type)),
+    type        = match.arg(type),
     min_version = min_version
   )
 
@@ -58,7 +58,7 @@ use_depends <- function(
 #' @export
 
 use_suggests <- function(
-  package, min_version = TRUE, tidy = TRUE, character_only = FALSE
+  package, min_version = NULL, tidy = TRUE, character_only = FALSE
 ) {
   if (!character_only) {
     package <-
