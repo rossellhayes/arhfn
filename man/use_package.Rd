@@ -2,7 +2,8 @@
 % Please edit documentation in R/use_dependency.R
 \name{use_package}
 \alias{use_package}
-\alias{use_dependency}
+\alias{use_depends}
+\alias{use_suggests}
 \title{Add a package dependency}
 \usage{
 use_package(
@@ -13,12 +14,9 @@ use_package(
   character_only = FALSE
 )
 
-use_dependency(
-  package,
-  min_version = TRUE,
-  tidy = TRUE,
-  character_only = FALSE
-)
+use_depends(package, min_version = TRUE, tidy = TRUE, character_only = FALSE)
+
+use_suggests(package, min_version = TRUE, tidy = TRUE, character_only = FALSE)
 }
 \arguments{
 \item{package}{Unquoted or quoted name of package.}

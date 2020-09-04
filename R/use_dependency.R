@@ -30,7 +30,7 @@ use_package <- function(
 
   usethis::use_package(
     package,
-    type        = match.arg(type),
+    type        = match.arg(tools::toTitleCase(type)),
     min_version = min_version
   )
 
@@ -40,7 +40,7 @@ use_package <- function(
 #' @rdname use_package
 #' @export
 
-use_dependency <- function(
+use_depends <- function(
   package, min_version = TRUE, tidy = TRUE, character_only = FALSE
 ) {
   if (!character_only) {
@@ -50,6 +50,23 @@ use_dependency <- function(
 
   use_package(
     package, type = "Depends", min_version = min_version, tidy = tidy,
+    character_only = TRUE
+  )
+}
+
+#' @rdname use_package
+#' @export
+
+use_suggests <- function(
+  package, min_version = TRUE, tidy = TRUE, character_only = FALSE
+) {
+  if (!character_only) {
+    package <-
+      rlang::as_label(rlang::sym(rlang::as_name(rlang::enquo(package))))
+  }
+
+  use_package(
+    package, type = "Suggests", min_version = min_version, tidy = tidy,
     character_only = TRUE
   )
 }

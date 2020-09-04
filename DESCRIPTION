@@ -26,6 +26,7 @@ Imports:
     stringi,
     stringr,
     tibble,
+    tools,
     usethis
 Encoding: UTF-8
 LazyData: true
