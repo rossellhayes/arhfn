@@ -16,7 +16,7 @@ use_package(
 
 use_depends(package, min_version = TRUE, tidy = TRUE, character_only = FALSE)
 
-use_suggests(package, min_version = TRUE, tidy = TRUE, character_only = FALSE)
+use_suggests(package, min_version = NULL, tidy = TRUE, character_only = FALSE)
 }
 \arguments{
 \item{package}{Unquoted or quoted name of package.}
