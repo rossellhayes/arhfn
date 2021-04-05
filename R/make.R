@@ -2,7 +2,7 @@
 #'
 #' Sources the contents of '_make.R' in an RStudio job
 #'
-#' @return Invisilbe [`NULL`]
+#' @return Invisible [`NULL`]
 #' @export
 
 make <- function() {

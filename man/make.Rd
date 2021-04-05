@@ -7,7 +7,7 @@
 make()
 }
 \value{
-Invisilbe \code{\link{NULL}}
+Invisible \code{\link{NULL}}
 }
 \description{
 Sources the contents of '_make.R' in an RStudio job
