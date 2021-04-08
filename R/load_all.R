@@ -31,15 +31,15 @@ load_all <- function() {
     cli::cli_process_done(NULL, "Loaded functions!")
   }
 
-  if (file.exists("_targets.R"))  {
-    cli::cli_process_start("Loading targets...")
-    targets::tar_load(
-      names = tidyselect::everything(),
-      meta  = dplyr::filter(targets::tar_meta(), type != "function"),
-      envir = .GlobalEnv
-    )
-    cli::cli_process_done(NULL, "Loaded targets!")
-  }
+  # if (file.exists("_targets.R"))  {
+  #   cli::cli_process_start("Loading targets...")
+  #   targets::tar_load(
+  #     names = tidyselect::everything(),
+  #     meta  = dplyr::filter(targets::tar_meta(), type != "function"),
+  #     envir = .GlobalEnv
+  #   )
+  #   cli::cli_process_done(NULL, "Loaded targets!")
+  # }
 
   cli::cli_alert_success("All done!")
 
