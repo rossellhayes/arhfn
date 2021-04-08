@@ -1,6 +1,6 @@
 Package: arhfn
 Title: Functions for Alex Rossell Hayes's Workflow
-Version: 0.7.0
+Version: 0.7.1
 Authors@R: 
     person(given = "Alex",
            family = "Rossell Hayes",
