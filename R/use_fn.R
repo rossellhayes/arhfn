@@ -32,7 +32,7 @@ use_fn <- function(name, ..., folder = "R") {
     usethis::edit_file(target_file)
     return(invisible(TRUE))
   }
-  readr::write_file(x = defn, path = target_file)
+  readr::write_file(x = defn, file = target_file)
   usethis::ui_done(paste("Function", usethis::ui_path(target_file), "created."))
   usethis::edit_file(target_file)
   invisible(TRUE)
