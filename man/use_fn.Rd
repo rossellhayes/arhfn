@@ -23,5 +23,5 @@ use_fn(test_function, x, y = "z")
 }
 }
 \seealso{
-\code{\link[usethis:use_r]{usethis::use_r()}} and \code{\link[fnmate:fnmate_fn.R]{fnmate::fnmate_fn.R()}}
+\code{\link[usethis:use_r]{usethis::use_r()}}
 }

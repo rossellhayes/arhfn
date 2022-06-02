@@ -4,7 +4,7 @@
 #' @param ... Unquoted function arguments
 #' @param folder The folder to place the file in. Defaults to "R".
 #'
-#' @seealso [usethis::use_r()] and [fnmate::fnmate_fn.R()]
+#' @seealso [usethis::use_r()]
 #'
 #' @export
 #' @examples
