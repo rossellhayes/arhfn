@@ -1,11 +1,8 @@
 Package: arhfn
 Title: Functions for Alex Rossell Hayes's Workflow
-Version: 0.7.1
+Version: 0.8.0
 Authors@R: 
-    person(given = "Alex",
-           family = "Rossell Hayes",
-           role = c("aut", "cre"),
-           email = "alexander@rossellhayes.com",
+    person("Alex", "Rossell Hayes", , "alexander@rossellhayes.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
@@ -30,8 +27,9 @@ Imports:
     tibble,
     tidyselect,
     tools,
-    usethis
+    usethis,
+    withr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
