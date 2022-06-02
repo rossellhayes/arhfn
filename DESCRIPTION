@@ -9,27 +9,17 @@ License: MIT + file LICENSE
 URL: https://github.com/rossellhayes/arhfn
 BugReports: https://github.com/rossellhayes/arhfn/issues
 Imports: 
-    beepr,
     cli,
-    crayon,
     dplyr,
-    drake,
     fs,
-    haven,
-    here,
     job,
-    magrittr,
+    mockery,
     pak,
     rappdirs,
     readr,
-    renv,
     rlang,
     rstudioapi,
-    stringi,
     stringr,
-    tibble,
-    tidyselect,
-    tools,
     usethis,
     withr
 Encoding: UTF-8
