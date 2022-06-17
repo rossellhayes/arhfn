@@ -18,10 +18,13 @@ Imports:
     rappdirs,
     readr,
     rlang,
+    rsthemes,
     rstudioapi,
     stringr,
     usethis,
     withr
+Remotes: 
+    gadenbuie/rsthemes
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
