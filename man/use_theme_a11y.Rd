@@ -2,7 +2,7 @@
 % Please edit documentation in R/use_theme_a11y.R
 \name{use_theme_a11y}
 \alias{use_theme_a11y}
-\title{Apply a color-blind friendly RStudio theme}
+\title{Apply an accessible RStudio theme}
 \usage{
 use_theme_a11y(dark = NULL, quietly = FALSE)
 }
@@ -14,5 +14,5 @@ theme is a light theme or a dark theme.}
 \item{quietly}{Suppress confirmation messages}
 }
 \description{
-Apply a color-blind friendly RStudio theme
+Applies the \link[rsthemes:rsthemes-package]{rsthemes} a11y-light and a11y-dark.
 }

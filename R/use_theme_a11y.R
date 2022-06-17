@@ -1,4 +1,6 @@
-#' Apply a color-blind friendly RStudio theme
+#' Apply an accessible RStudio theme
+#'
+#' Applies the [rsthemes][rsthemes::rsthemes] a11y-light and a11y-dark.
 #'
 #' @param dark A logical indicating whether to use a dark theme.
 #'   If `NULL`, the default, the decision is based on whether the current active
