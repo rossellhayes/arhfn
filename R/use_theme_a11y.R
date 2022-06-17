@@ -11,9 +11,9 @@ use_theme_a11y <- function(dark = NULL, quietly = FALSE) {
     dark <- rstudioapi::getThemeInfo()$dark
   }
 
-  apply_theme <- utils::getFromNamespace("apply_theme", "rsthemes")
-
   style <- if (isTRUE(dark)) "dark" else "light"
 
-  apply_theme(paste0("a11y-", style, " {rsthemes}"), quietly, style = style)
+  theme <- paste0("a11y-", style, " {rsthemes}")
+  apply_theme <- utils::getFromNamespace("apply_theme", "rsthemes")
+  apply_theme(theme, quietly, style)
 }
