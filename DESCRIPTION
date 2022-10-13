@@ -1,6 +1,6 @@
 Package: arhfn
 Title: Functions for Alex Rossell Hayes's Workflow
-Version: 0.9.0
+Version: 0.9.0.9000
 Authors@R: 
     person("Alex", "Rossell Hayes", , "alexander@rossellhayes.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
