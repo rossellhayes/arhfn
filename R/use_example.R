@@ -1,31 +1,49 @@
 #' Create or edit an example .R file
 #'
-#' @param name File name, without extension; will create if it doesn't already
-#'     exist. If not specified, and you're currently in a .R file, will guess
-#'     name based on .R name.
+#' Creates an R script in `man/examples` to store examples for a function.
+#'
+#' @param name File name, without extension.
+#'   If [`NULL`], the default, automatically generate a name based on the file
+#'   that is currently open.
+#' @param dir The directory where example scripts will be stored.
+#'   Defaults to `man/examples`.
 #'
 #' @seealso [usethis::use_r()] and [usethis::use_test()]
 #'
-#' @importFrom rlang %||%
 #' @export
 
-use_example <- function(name = NULL) {
-  name <- name %||% usethis:::get_active_r_file(path = "R")
-  name <- usethis:::slug(name, "R")
-  usethis:::check_file_name(name)
-  usethis::use_directory("examples")
-  usethis::use_build_ignore("examples")
-  path      <- fs::path("examples", name)
-  full_path <- usethis::proj_path(path)
-  usethis::edit_file(full_path)
-  usethis::ui_todo(
-    paste(
-      "Add",
-      usethis::ui_code(paste("#' @example", path)),
-      "to your roxygen documentation"
+use_example <- function(name = NULL, dir = "man/examples") {
+  rlang::check_installed("fs", "to use `use_example()`.")
+
+  if (!is.null(name)) {
+    name <- paste0(name, ".R")
+  } else {
+    rlang::check_installed(
+      "rstudioapi",
+      "to automatically detect the current file in `use_example()`."
     )
+
+    current_path <- rstudioapi::getSourceEditorContext()$path
+    current_dir <- fs::path_file(fs::path_dir(current_path))
+
+    name <- fs::path_file(current_path)
+
+    if (current_dir %in% c("tests", "testthat")) {
+      name <- gsub("^test-", "", name)
+    }
+
+    name <- paste0("example-", name)
+  }
+
+  fs::dir_create(dir)
+
+  path <- fs::path(dir, name)
+  file.edit(path)
+
+  cli::cli_inform(
+    c("*" = "Add {.code #' @example {path}} to your roxygen documentation.")
   )
-  invisible(full_path)
+  invisible(path)
 }
 
 #' Create or edit a test file

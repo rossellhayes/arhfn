@@ -4,15 +4,15 @@
 \alias{use_example}
 \title{Create or edit an example .R file}
 \usage{
-use_example(name = NULL)
+use_example(name = NULL, dir = "man/examples")
 }
 \arguments{
-\item{name}{File name, without extension; will create if it doesn't already
-exist. If not specified, and you're currently in a .R file, will guess
-name based on .R name.}
+\item{name}{File name, without extension.
+If \code{\link{NULL}}, the default, automatically generate a name based on the file
+that is currently open.}
 }
 \description{
-Create or edit an example .R file
+Creates an R script in \code{man/examples} to store examples for a function.
 }
 \seealso{
 \code{\link[usethis:use_r]{usethis::use_r()}} and \code{\link[usethis:use_r]{usethis::use_test()}}
