@@ -18,6 +18,7 @@ Imports:
     rappdirs,
     readr,
     rlang,
+    roxygen2,
     rsthemes,
     rstudioapi,
     stringr,

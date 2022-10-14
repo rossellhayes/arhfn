@@ -4,12 +4,18 @@
 \alias{use_example}
 \title{Create or edit an example .R file}
 \usage{
-use_example(name = NULL, dir = "man/examples")
+use_example(name = NULL, dir = "man/examples", open = rlang::is_interactive())
 }
 \arguments{
-\item{name}{File name, without extension.
-If \code{\link{NULL}}, the default, automatically generate a name based on the file
-that is currently open.}
+\item{name}{Either a name without extension, or \code{NULL} to create the paired
+file based on currently open file in the script editor.
+If the \verb{R/} or test file is open, \code{use_example()} will create/open the
+corresponding example file.}
+
+\item{dir}{The directory where example scripts will be stored.
+Defaults to \code{man/examples}.}
+
+\item{open}{Whether to open the file for interactive editing.}
 }
 \description{
 Creates an R script in \code{man/examples} to store examples for a function.
