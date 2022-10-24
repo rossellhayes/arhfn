@@ -10,17 +10,21 @@
 #'   Defaults to `man/examples`.
 #' @inheritParams usethis::use_r
 #'
+#' @return If an example file does not already exist, creates an example file.
+#'   If `open` is `TRUE`, opens the example file.
 #' @seealso [usethis::use_r()] and [usethis::use_test()]
 #'
+#' @importFrom rlang %||%
 #' @export
 
 use_example <- function(
   name = NULL, dir = "man/examples", open = rlang::is_interactive()
 ) {
   # Determine file name
+  usethis:::check_not_empty_file_name(name)
   name <- name %||% fs::path_file(rstudioapi::getSourceEditorContext()$path)
   name <- gsub("^test-", "", name)
-  name <- fs::path_ext_set(name, "R")
+  name <- usethis:::slug(name, "R")
 
   # Determine path to `R/` file
   r_path <- fs::path("R", name)
@@ -72,8 +76,7 @@ use_example <- function(
     writeLines(preexisting_examples, example_path)
   }
 
-  usethis::edit_file(example_path, open = open)
-  invisible(example_path)
+  usethis::edit_file(usethis::proj_path(example_path), open = open)
 }
 
 #' Create or edit a test file
@@ -91,15 +94,51 @@ use_example <- function(
 
 use_test <- function(name = NULL, open = rlang::is_interactive()) {
   if (!usethis:::uses_testthat()) {
-    usethis::use_testthat()
+    usethis::use_testthat_impl()
   }
+
+  usethis:::check_not_empty_file_name(name)
   name <- name %||% fs::path_file(rstudioapi::getSourceEditorContext()$path)
+  name <- gsub("^example-", "", name)
   name <- paste0("test-", name)
-  name <- fs::path_ext_set(fs::path_ext_remove(name), "R")
+  name <- usethis:::slug(name, "R")
   usethis:::check_file_name(name)
+
   path <- fs::path("tests", "testthat", name)
   if (!fs::file_exists(path)) {
-    usethis::use_template("test-example-2.1.R", save_as = path, open = FALSE)
+    usethis:::use_template("test-example-2.1.R", save_as = path, open = FALSE)
   }
+
   usethis::edit_file(usethis::proj_path(path), open = open)
+}
+
+#' Create or edit an R file
+#'
+#' @param name Either a name without extension, or `NULL` to create a test file
+#'   file based on currently open file in the script editor.
+#' @param open Whether to open the file for interactive editing.
+#'
+#' @return If an R file does not already exist, creates an R file.
+#'   If `open` is `TRUE`, opens the R file.
+#' @seealso [usethis::use_r()], which this function is modified from
+#'
+#' @importFrom rlang %||%
+#' @export
+
+use_r <- function(name = NULL, open = rlang::is_interactive()) {
+  usethis:::check_not_empty_file_name(name)
+  name <- name %||% fs::path_file(rstudioapi::getSourceEditorContext()$path)
+  name <- gsub("^example-|^test-", "", name)
+  name <- usethis:::slug(name, "R")
+  usethis:::check_file_name(name)
+
+  usethis::use_directory("R")
+  usethis::edit_file(usethis::proj_path("R", name), open = open)
+
+  test_path <- usethis::proj_path("tests", "testthat", paste0("test-", name, ".R"))
+  if (!fs::file_exists(test_path)) {
+    usethis::ui_todo("Call {ui_code('use_test()')} to create a matching test file")
+  }
+
+  invisible(TRUE)
 }

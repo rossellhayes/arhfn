@@ -17,6 +17,10 @@ Defaults to \code{man/examples}.}
 
 \item{open}{Whether to open the file for interactive editing.}
 }
+\value{
+If an example file does not already exist, creates an example file.
+If \code{open} is \code{TRUE}, opens the example file.
+}
 \description{
 Creates an R script in \code{man/examples} to store examples for a function.
 }
