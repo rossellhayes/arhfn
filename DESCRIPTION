@@ -3,7 +3,7 @@ Title: Functions for Alex Rossell Hayes's Workflow
 Version: 0.9.0.9000
 Authors@R: 
     person("Alex", "Rossell Hayes", , "alexander@rossellhayes.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = structure("0000-0001-9412-0457", .Names = "ORCID"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 URL: https://github.com/rossellhayes/arhfn
@@ -12,9 +12,9 @@ Imports:
     cli,
     dplyr,
     fs,
-    job,
     mockery,
     pak,
+    pingr,
     rappdirs,
     readr,
     rlang,
@@ -24,7 +24,9 @@ Imports:
     stringr,
     usethis (>= 2.1.6.9000),
     withr
-Remotes:  
+Suggests:
+    job
+Remotes: 
     gadenbuie/rsthemes,
     r-lib/usethis
 Encoding: UTF-8

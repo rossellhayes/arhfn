@@ -35,6 +35,8 @@ upgrade <- function(job = TRUE, daily = FALSE) {
   }
 
   if (isTRUE(job)) {
+    rlang::check_installed("job")
+
     return(
       job::empty(
         {
