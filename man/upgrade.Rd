@@ -4,7 +4,7 @@
 \alias{upgrade}
 \title{Upgrade all installed packages}
 \usage{
-upgrade(job = TRUE, daily = FALSE)
+upgrade(job = rlang::is_installed("job"), daily = FALSE)
 }
 \arguments{
 \item{job}{If \code{TRUE}, run the upgrade in a background RStudio job}

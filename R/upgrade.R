@@ -6,7 +6,7 @@
 #' @return Invisibly returns `NULL`
 #' @export
 
-upgrade <- function(job = TRUE, daily = FALSE) {
+upgrade <- function(job = rlang::is_installed("job"), daily = FALSE) {
   date <- as.character(Sys.Date())
   cache <- fs::path(rappdirs::user_cache_dir("arhfn"), "pkg_updates.txt")
 
