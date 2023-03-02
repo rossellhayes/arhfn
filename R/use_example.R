@@ -1,3 +1,28 @@
+# These functions are adapted from functions in the usethis package
+# https://github.com/r-lib/usethis
+#
+# usethis is released under the MIT License
+#
+# Copyright (c) 2020 usethis authors
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# 	The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 #' Create or edit an example .R file
 #'
 #' Creates an R script in `man/examples` to store examples for a function.
@@ -21,10 +46,7 @@ use_example <- function(
   name = NULL, dir = "man/examples", open = rlang::is_interactive()
 ) {
   # Determine file name
-  usethis:::check_not_empty_file_name(name)
-  name <- name %||% fs::path_file(rstudioapi::getSourceEditorContext()$path)
-  name <- gsub("^test-", "", name)
-  name <- usethis:::slug(name, "R")
+  name <- fs::path(dir, compute_name(name))
 
   # Determine path to `R/` file
   r_path <- fs::path("R", name)
@@ -94,22 +116,16 @@ use_example <- function(
 
 use_test <- function(name = NULL, open = rlang::is_interactive()) {
   if (!usethis:::uses_testthat()) {
-    usethis::use_testthat_impl()
+    usethis:::use_testthat_impl()
   }
 
-  usethis:::check_not_empty_file_name(name)
-  name <- name %||% fs::path_file(rstudioapi::getSourceEditorContext()$path)
-  name <- gsub("^example-", "", name)
-  name <- paste0("test-", name)
-  name <- usethis:::slug(name, "R")
-  usethis:::check_file_name(name)
-
-  path <- fs::path("tests", "testthat", name)
+  path <- fs::path("tests", "testthat", paste0("test-", compute_name(name)))
   if (!fs::file_exists(path)) {
-    usethis:::use_template("test-example-2.1.R", save_as = path, open = FALSE)
+    usethis::use_template("test-example-2.1.R", save_as = path)
   }
-
   usethis::edit_file(usethis::proj_path(path), open = open)
+
+  invisible(TRUE)
 }
 
 #' Create or edit an R file
@@ -126,19 +142,65 @@ use_test <- function(name = NULL, open = rlang::is_interactive()) {
 #' @export
 
 use_r <- function(name = NULL, open = rlang::is_interactive()) {
-  usethis:::check_not_empty_file_name(name)
-  name <- name %||% fs::path_file(rstudioapi::getSourceEditorContext()$path)
-  name <- gsub("^example-|^test-", "", name)
-  name <- usethis:::slug(name, "R")
-  usethis:::check_file_name(name)
-
   usethis::use_directory("R")
-  usethis::edit_file(usethis::proj_path("R", name), open = open)
 
-  test_path <- usethis::proj_path("tests", "testthat", paste0("test-", name, ".R"))
-  if (!fs::file_exists(test_path)) {
-    usethis::ui_todo("Call {ui_code('use_test()')} to create a matching test file")
-  }
+  path <- fs::path("R", compute_name(name))
+  usethis::edit_file(usethis::proj_path(path), open = open)
 
   invisible(TRUE)
+}
+
+compute_name <- function(name = NULL, ext = "R", error_call = caller_env()) {
+  if (!is.null(name)) {
+    usethis:::check_file_name(name, call = error_call)
+
+    if (fs::path_ext(name) == "") {
+      name <- fs::path_ext_set(name, ext)
+    } else if (fs::path_ext(name) != "R") {
+      cli::cli_abort(
+        "{.arg name} must have extension {.str {ext}}, not {.str {path_ext(name)}}.",
+        call = error_call
+      )
+    }
+    return(as.character(name))
+  }
+
+  if (!usethis:::rstudio_available()) {
+    cli::cli_abort(
+      "{.arg name} is absent but must be specified.",
+      call = error_call
+    )
+  }
+  compute_active_name(
+    path = rstudioapi::getSourceEditorContext()$path,
+    ext = ext,
+    error_call = error_call
+  )
+}
+
+compute_active_name <- function(path, ext, error_call = caller_env()) {
+  if (is.null(path)) {
+    cli::cli_abort(
+      c(
+        "No file is open in RStudio.",
+        i = "Please specify {.arg name}."
+      ),
+      call = error_call
+    )
+  }
+
+  ## rstudioapi can return a path like '~/path/to/file' where '~' means
+  ## R's notion of user's home directory
+  path <- usethis:::proj_path_prep(fs::path_expand_r(path))
+
+  dir <- fs::path_dir(usethis:::proj_rel_path(path))
+
+  file <- fs::path_file(path)
+  if (dir == "tests/testthat") {
+    file <- gsub("^test[-_]", "", file)
+  } else if (dir == "man/examples") {
+    file <- gsub("^example[-_]", "", file)
+  }
+
+  as.character(fs::path_ext_set(file, ext))
 }
