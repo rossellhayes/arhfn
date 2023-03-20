@@ -46,7 +46,7 @@ use_example <- function(
   name = NULL, dir = "man/examples", open = rlang::is_interactive()
 ) {
   # Determine file name
-  name <- fs::path(dir, compute_name(name))
+  name <- compute_name(name)
 
   # Determine path to `R/` file
   r_path <- fs::path("R", name)
@@ -92,6 +92,9 @@ use_example <- function(
 
     usethis::ui_line("#' @example {example_path}")
   }
+
+  # If `dir` doesn't already exist, create it
+  fs::dir_create(dir, recurse = TRUE)
 
   # If the example file doesn't already exist, copy examples from the `R/` file
   if (!fs::file_exists(example_path)) {
