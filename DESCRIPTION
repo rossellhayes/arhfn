@@ -1,6 +1,6 @@
 Package: arhfn
 Title: Functions for Alex Rossell Hayes's Workflow
-Version: 0.9.2
+Version: 0.9.3
 Authors@R: 
     person("Alex", "Rossell Hayes", , "alexander@rossellhayes.com", role = c("aut", "cre"),
            comment = structure("0000-0001-9412-0457", .Names = "ORCID"))
