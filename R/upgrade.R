@@ -13,7 +13,19 @@ upgrade <- function(job = rlang::is_installed("job"), daily = FALSE) {
   if (fs::file_exists(cache)) {
     if (daily) {
       cache_date <- readLines(cache)
-      if (identical(date, cache_date)) return(invisible(NULL))
+
+      if (identical(date, cache_date)) {
+        force_upgrade_call <- format(
+          rlang::call_modify(rlang::current_call(), daily = FALSE)
+        )
+
+        cli::cli_inform(c(
+          "v" = "Packages have already been upgraded today.",
+          "*" = "Use {.code {force_upgrade_call}} to upgrade again today."
+        ))
+
+        return(invisible(NULL))
+      }
     }
   } else {
     fs::dir_create(fs::path_dir(cache))
@@ -22,6 +34,7 @@ upgrade <- function(job = rlang::is_installed("job"), daily = FALSE) {
 
   upgrade_impl <- function(date, cache) {
     packages <- pak::pkg_list()
+    packages <- dplyr::filter(packages, !is.na(.data$remotetype))
     packages <- dplyr::coalesce(packages$remotepkgref, packages$package)
     packages <- stringr::str_subset(packages, "local::", negate = TRUE)
 
@@ -29,7 +42,21 @@ upgrade <- function(job = rlang::is_installed("job"), daily = FALSE) {
 
     if (!pingr::is_online()) stop("Internet connection is unavailable.")
 
-    pak::pkg_install(packages, ask = FALSE)
+    tryCatch(
+      pak::pkg_install(packages, ask = FALSE),
+      error = function(e) {
+        cli::cli_alert_danger("Upgrading packages all at once failed.")
+
+        cli::cli_h2("Trying sequential install...")
+        purrr::walk(
+          sample(packages),
+          function(package) {
+            cli::cli_h3("Installing {package}...")
+            try(pak::pkg_install(package, ask = FALSE))
+          }
+        )
+      }
+    )
 
     writeLines(date, cache)
   }
