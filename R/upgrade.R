@@ -47,12 +47,20 @@ upgrade <- function(job = rlang::is_installed("job"), daily = FALSE) {
       error = function(e) {
         cli::cli_alert_danger("Upgrading packages all at once failed.")
 
+        cli::cli_inform(e$parent$stdout)
+
         cli::cli_h2("Trying sequential install...")
+
         purrr::walk(
           sample(packages),
           function(package) {
             cli::cli_h3("Installing {package}...")
-            try(pak::pkg_install(package, ask = FALSE))
+            tryCatch(
+              pak::pkg_install(package, ask = FALSE),
+              error = function(e) {
+                cli::cli_inform(e$parent$stdout)
+              }
+            )
           }
         )
       }
