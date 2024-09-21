@@ -51,10 +51,23 @@ use_package_impl <- function(
 
   if (isFALSE(min_version)) min_version <- NULL
 
-  lapply(packages, function(package) {
-    if (rlang::is_symbol(package)) package <- rlang::expr_text(package)
-    usethis::use_package(package, type = type, min_version = min_version)
-  })
+  is_symbol <- vapply(packages, rlang::is_symbol, logical(1))
+  is_call <- vapply(packages, rlang::is_call, logical(1))
+
+  while(any(is_symbol) || any(is_call)) {
+    packages[is_symbol] <- lapply(packages[is_symbol], rlang::expr_text)
+    packages[is_call] <- lapply(packages[is_call], rlang::eval_bare)
+
+    is_symbol <- vapply(packages, rlang::is_symbol, logical(1))
+    is_call <- vapply(packages, rlang::is_call, logical(1))
+  }
+
+  lapply(
+    unlist(packages),
+    function(package) {
+      usethis::use_package(package, type = type, min_version = min_version)
+    }
+  )
 
   if (isTRUE(tidy)) {
     usethis::use_tidy_description()
